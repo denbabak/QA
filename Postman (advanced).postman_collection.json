@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "78d60c97-b19b-4040-9bbc-b09140ebdb02",
+		"name": "Postman (advanced)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create a User",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"gender\", _.sample(['male','female']));\r",
+							"pm.environment.set(\"status\", _.sample(['active', 'inactive']))\r",
+							"\r",
+							"pm.test(\"Answer should have status 200 OK\"), function () {\r",
+							"pm.response.to.have.status(200)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be JSON\"), function () {\r",
+							"pm.response.to.be.json\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be fast\"), function () {\r",
+							"pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should have all the keys\"), function (){\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data).to.have.all.keys('id', 'name', 'email', 'gender', 'status');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\":\"{{$randomFirstName}}\",\r\n  \"email\":\"{{$randomExampleEmail}}\",\r\n  \"status\":\"{{status}}\",\r\n  \"gender\":\"{{gender}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Post",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Answer should have status 200 OK\"), function () {\r",
+							"pm.response.to.have.status(200)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be JSON\"), function () {\r",
+							"pm.response.to.be.json\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be fast\"), function () {\r",
+							"pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should have all the keys\"), function (){\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data).to.have.all.keys('title', 'body');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"title\":\"{{$randomLoremWords}}\",\r\n\"body\":\"{{$randomWords}}\",\r\n\"name\":\"{{$randomFirstName}}\",\r\n\"email\":\"{{test@test.gmail.com}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/3092/posts",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"3092",
+						"posts"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a Comment",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Answer should have status 200 OK\"), function () {\r",
+							"pm.response.to.have.status(200)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be JSON\"), function () {\r",
+							"pm.response.to.be.json\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be fast\"), function () {\r",
+							"pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should have all the keys\"), function (){\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data).to.have.all.keys('title', 'body');\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"title\":\"{{$randomWords}}\",\r\n\"body\":\"{{$randomWords}}\",\r\n\"name\":\"{{$randomFirstName}}\",\r\n\"post\":\"{123}\",\r\n\"email\":\"{{$randomExampleEmail}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/posts/123/comments",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"posts",
+						"123",
+						"comments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a ToDo",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.test(\"Answer should have status 200 OK\"), function () {\r",
+							"pm.response.to.have.status(200)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be JSON\"), function () {\r",
+							"pm.response.to.be.json\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should be fast\"), function () {\r",
+							"pm.expect(pm.response.responseTime).to.be.below(500)\r",
+							"}\r",
+							"\r",
+							"pm.test(\"Answer should have all the keys\"), function (){\r",
+							"const jsonData = pm.response.json();\r",
+							"pm.expect(jsonData.data).to.have.all.keys('title', 'body');\r",
+							"}\r",
+							"\r",
+							"pm.environment.set(\"status\", _.sample(['pending']))"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Bearer",
+						"value": "9c1682a1b03b7d2387fa02f65ed599d7815a7159148eccc11d4e3522c96294bd",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"title\":\"{{$randomWords}}\",\r\n\"status\":\"{{status}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://gorest.co.in/public/v1/users/3092/todos",
+					"protocol": "https",
+					"host": [
+						"gorest",
+						"co",
+						"in"
+					],
+					"path": [
+						"public",
+						"v1",
+						"users",
+						"3092",
+						"todos"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
